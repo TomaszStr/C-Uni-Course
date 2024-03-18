@@ -1,2 +1,2 @@
-# C-Uni-Course
+# Csharp-Uni-Course
 Projects for a programming course.
