@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tmstr\\CSProjects\\Csharp-Uni-Course\\lab2\\tests\\testy.csproj": {}
+    "C:\\Users\\tmstr\\CSProjects\\lab5\\lab5.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tmstr\\CSProjects\\Csharp-Uni-Course\\lab2\\tests\\testy.csproj": {
+    "C:\\Users\\tmstr\\CSProjects\\lab5\\lab5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tmstr\\CSProjects\\Csharp-Uni-Course\\lab2\\tests\\testy.csproj",
-        "projectName": "testy",
-        "projectPath": "C:\\Users\\tmstr\\CSProjects\\Csharp-Uni-Course\\lab2\\tests\\testy.csproj",
+        "projectUniqueName": "C:\\Users\\tmstr\\CSProjects\\lab5\\lab5.csproj",
+        "projectName": "lab5",
+        "projectPath": "C:\\Users\\tmstr\\CSProjects\\lab5\\lab5.csproj",
         "packagesPath": "C:\\Users\\tmstr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tmstr\\CSProjects\\Csharp-Uni-Course\\lab2\\tests\\obj\\",
+        "outputPath": "C:\\Users\\tmstr\\CSProjects\\lab5\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tmstr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,28 +44,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[17.7.1, )"
-            },
-            "coverlet.collector": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[3.2.0, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.4.2, )"
-            },
-            "xunit.runner.visualstudio": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.4.5, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -80,6 +58,10 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.17, 7.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[7.0.17, 7.0.17]"
             },
             {
