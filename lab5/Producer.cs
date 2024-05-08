@@ -4,7 +4,7 @@ class Producer{
     public int count;
     public bool endMe=false;
     int delay;
-    Mutex ?mutex = null;
+    Mutex mutex;
     public Queue<Product> destination;
 
     public Producer(int Id, int Delay, Queue<Product> Destination,Mutex mut){

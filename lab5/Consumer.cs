@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 class Consumer{
     public int id;
-    public bool endMe=false;
+    public volatile bool endMe=false;
     int delay;
-    Mutex ?mutex=null;
+    Mutex mutex;
     public Dictionary<int,int> consumed;
     public Queue<Product> source;
 
@@ -28,7 +28,7 @@ class Consumer{
             if(source.Count > 0){
                 consume(source.Dequeue());
             }
-            else Console.WriteLine("Consumer:{0} empty stack!",id);
+            else Console.WriteLine("Consumer:{0} empty queue!",id);
 
             Thread.Sleep(delay);
         }

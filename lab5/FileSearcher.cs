@@ -13,7 +13,8 @@ class FileSearcher{
 
     public void search(){//String path, Queue<String> list){
         foreach(String fileName in Directory.GetFiles(dirPath,regex,SearchOption.AllDirectories)){
-            found.Enqueue(fileName);
+            lock(found){found.Enqueue(fileName);}
+            
             //Console.WriteLine(fileName);
         }
         done = true;
@@ -22,8 +23,11 @@ class FileSearcher{
     public void start(){
         Console.WriteLine("START SEARCH");
         while(!done || found.Count > 0)
-            if(found.Count > 0)
-                Console.WriteLine("FOUND: "+found.Dequeue());
+            if(found.Count > 0){
+                string s;
+                lock(found){s = found.Dequeue();}
+                Console.WriteLine("FOUND: "+s);
+            }
         Console.WriteLine("SEARCH DONE");
     }
 
