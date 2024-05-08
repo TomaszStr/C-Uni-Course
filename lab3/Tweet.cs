@@ -2,19 +2,19 @@ using System.Globalization;
 
 public class Tweet{
 
-    String ?_Text;
-    String ?_UserName;
-    String ?_LinkToTweet;
-    String ?_FirstLinkUrl;
-    String ?_CreatedAt;
-    String ?_TweetEmbedCode;
+    // String ?_Text;
+    // String ?_UserName;
+    // String ?_LinkToTweet;
+    // String ?_FirstLinkUrl;
+    // String ?_CreatedAt;
+    // String ?_TweetEmbedCode;
 
-    public String? Text{
+    public String Text{
         get; set;
-    }
-    public String? UserName{
+    } = String.Empty;
+    public String UserName{
         get; set;
-    }
+    } = String.Empty;
     public String? LinkToTweet{
         get; set;
     }
@@ -32,12 +32,11 @@ public class Tweet{
     {
         return "USERNAME: "+UserName
         +"\nTWEET:" + Text
-        +"\nDATE: " + CreatedAt
-        +"\n";
+        +"\nDATE: " + CreatedAt;
     }
 
 }
-public class CompareUsername : Comparer<Tweet>
+public class TweetCompareUsername : Comparer<Tweet>
 {
     public override int Compare(Tweet? x, Tweet? y)
     {
@@ -53,7 +52,7 @@ public class CompareUsername : Comparer<Tweet>
     }
 }
 
-public class CompareDate : Comparer<Tweet>
+public class TweetCompareDate : Comparer<Tweet>
 {
     public override int Compare(Tweet? x, Tweet? y)
     {

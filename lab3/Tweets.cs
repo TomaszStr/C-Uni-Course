@@ -1,8 +1,8 @@
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 
 public class Tweets{
-    List<Tweet>? _Data;
-
+    //List<Tweet>? _Data;
     public List<Tweet>? Data{
         get; set;
     }
@@ -33,11 +33,9 @@ public class Tweets{
             throw new Exception("EMPTY LIST");
         Dictionary<string,int> result = new Dictionary<string,int>();
         foreach(Tweet t in Data){
-            String text = t.Text;
-            //String[] strings = t.Text.Split(" ");//simple version
-            
-            //MORE ACCURATE
-            String pattern = @"\b\w+\b";
+            String text = t.Text?.ToLower() ?? "";
+            //String[] strings = t.Text.Split(" "); //simple version
+            String pattern = @"\s\w+\s"; //MORE ACCURATE
             MatchCollection matches = Regex.Matches(text,pattern);
             String[] strings = matches.Select(x => x.Value).ToArray();
             
@@ -53,10 +51,14 @@ public class Tweets{
 
     public Dictionary<string,double> TermIDF(){
         Dictionary<string,double> result = new Dictionary<string,double>();
+        // if data is null return empty dict
+        if(Data == null)
+            return result; 
+        
         int len = Data.Count;
 
         foreach(Tweet t in Data){
-            string pattern = @"\b\w+\b";
+            string pattern = @"\s\w+\s";
             MatchCollection matches = Regex.Matches(t.Text,pattern);
             List<String> unique = matches.Select(x => x.Value).ToList();
             unique = unique.Distinct().ToList();
@@ -73,6 +75,26 @@ public class Tweets{
         }
         
         return result;
+    }
 
+    public void ToXML(String fileName){
+        XmlSerializer x = new XmlSerializer(typeof(Tweets));
+        using(StreamWriter writer = File.CreateText("data.xml")){
+            x.Serialize(writer,this);
+        }
+    }
+
+    public static Tweets getFromXML(String filePath){
+        //READ XML
+        XmlSerializer x = new XmlSerializer(typeof(Tweets));
+        Tweets tweets = new Tweets();
+        using(StreamReader reader = new StreamReader(filePath)){
+            var deserialized = x.Deserialize(reader);
+            if(deserialized == null)
+                throw new Exception("Deserialization unsuccessful");
+            tweets = (Tweets) deserialized;
+        }
+        
+        return tweets;
     }
 }
