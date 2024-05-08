@@ -26,31 +26,37 @@ class Program{
         List<OrderDetail> orderDetails = Reader<OrderDetail>.ReadList("resources/orders_details.csv",",",true,
         x=>new OrderDetail(x[0], x[1], x[2], x[3], x[4]));
 
-        // //Excercise 2
-        // var exc2 = getSurnames(employees);
-        // foreach(String str in exc2)
-        //     Console.WriteLine(str);
+        Console.WriteLine("\n\nEXCERCISE 2\n\n");
+        //Excercise 2
+        var exc2 = getSurnames(employees);
+        foreach(String str in exc2)
+            Console.WriteLine(str);
         
-        // //Excercise 3
-        // var exc3 = getEmployeesLocation(employees,employeeTerritories,territories,regions);
+        Console.WriteLine("\n\nEXCERCISE 3\n\n");
+        //Excercise 3
+        var exc3 = getEmployeesLocation(employees,employeeTerritories,territories,regions);
 
-        // foreach(String str in exc3)
-        //     Console.WriteLine(str);
+        foreach(String str in exc3)
+            Console.WriteLine(str);
 
-        // //Excercise 4
-        // var exc4 = getRegionEmployees(employees,employeeTerritories,territories,regions);
+        Console.WriteLine("\n\nEXCERCISE 4\n\n");
+        //Excercise 4
+        var exc4 = getRegionEmployees(employees,employeeTerritories,territories,regions);
 
-        // foreach(Region reg in exc4.Keys){
-        //     Console.WriteLine(reg.ToString());
-        //     foreach(Employee emp in exc4[reg])
-        //         Console.WriteLine(emp.ToString());
-        // }
+        foreach(Region reg in exc4.Keys){
+            Console.WriteLine(reg.ToString());
+            foreach(Employee emp in exc4[reg].Distinct())
+                Console.WriteLine(emp.ToString());
+            Console.WriteLine();
+        }
 
-        // //Excercise 5
-        // var exc5 = getRegionEmployeesCount(employees,employeeTerritories,territories,regions);
-        // foreach(Region reg in exc5.Keys)
-        //     Console.WriteLine(reg.ToString()+" number of employees: "+exc5[reg]);
+        Console.WriteLine("\n\nEXCERCISE 5\n\n");
+        //Excercise 5
+        var exc5 = getRegionEmployeesCount(employees,employeeTerritories,territories,regions);
+        foreach(Region reg in exc5.Keys)
+            Console.WriteLine(reg.ToString()+" number of employees: "+exc5[reg]);
 
+        Console.WriteLine("\n\nEXCERCISE 6\n\n");
         //Excercise 6
         var exc6 = getEmployeesOrderStatistics(employees,orders,orderDetails);
         foreach(Employee emp in exc6.Keys)
@@ -120,7 +126,7 @@ class Program{
         join e in employees on et.EmployeeId equals e.EmployeeId
         select new {Region=r,Employee=e})
         group er by er.Region into grouped
-        select new {Region=grouped.Key,EmpList=grouped.Count()};
+        select new {Region=grouped.Key,EmpList=grouped.Distinct().Count()}; //distinct ?
 
         result = query.ToDictionary(x=>x.Region,x=>x.EmpList);
         return result;
@@ -135,10 +141,11 @@ class Program{
             join o in orders on e.EmployeeId equals o.EmployeeId
             join od in orderDetails on o.OrderId equals od.Orderid
             select new{Employee=e,Order=o,OrderDetail=od})
+
             group empStats by empStats.Employee into grouped
             select new{grouped.Key,
-                       Max=grouped.Max(grouped=>double.Parse(grouped.OrderDetail.UnitPrice)),
-                       Average=grouped.Average(grouped=>double.Parse(grouped.OrderDetail.UnitPrice)),
+                       Max=grouped.Max(grouped=>double.Parse(grouped.OrderDetail.UnitPrice) * int.Parse(grouped.OrderDetail.Quantity)),
+                       Average=grouped.Average(grouped=>double.Parse(grouped.OrderDetail.UnitPrice) * int.Parse(grouped.OrderDetail.Quantity)),
                        Count=grouped.Count(grouped=>grouped.Order!=null)};
 
         result=query.ToDictionary(x=>x.Key,x=>(x.Max,x.Average,x.Count));//(Dictionary<Employee,(double Max,double Avg,int Count)>)query;

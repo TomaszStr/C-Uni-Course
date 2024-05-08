@@ -1,7 +1,7 @@
 namespace classes{
     class EmployeeTerritory{
-        private String _employeeId="";
-        private String _territoryId="";
+        private String _employeeId=String.Empty;
+        private String _territoryId=String.Empty;
         public String EmployeeId{
             get => _employeeId;
             set =>_employeeId = value;

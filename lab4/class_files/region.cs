@@ -1,8 +1,8 @@
 namespace classes{
 
     class Region{
-        private String _regionDescription="";
-        private String _regionId="";
+        private String _regionDescription=String.Empty;
+        private String _regionId=String.Empty;
         public String RegionDescription{
             get{return _regionDescription;}
             set{_regionDescription = value;}

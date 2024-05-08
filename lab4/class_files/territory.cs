@@ -1,9 +1,9 @@
 namespace classes{
 
     class Territory{
-        private String _territoryId="";
-        private String _territoryDescription="";
-        private String _regionId="";
+        private String _territoryId=String.Empty;
+        private String _territoryDescription=String.Empty;
+        private String _regionId=String.Empty;
         public String TerritoryId{
             get{return _territoryId;}
             set{_territoryId = value;}
